@@ -26,6 +26,8 @@
   - Was genau abgeben
   - Was zusätzlich machen
 
+- Meeting mit Betreuer vorbereiten
+
 
 ## 26.02.2020 14.00 (zusatz Meeting mit Betreuer)
 - offene Fragen:
