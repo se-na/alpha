@@ -1,0 +1,36 @@
+image: openjdk:8-jdk
+
+variables: # They're named to match the properties you would typically specify in your app's build.gradle
+  ANDROID_COMPILE_SDK: "29"
+  ANDROID_BUILD_TOOLS: "29.0.2"
+  ANDROID_SDK_TOOLS: "4333796"
+
+before_script: #Installing packages
+  - apt-get --quiet update --yes
+  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1 #Installing the Android SDK
+  
+  - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
+  - unzip -q android-sdk.zip -d android-sdk-linux
+  
+  - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
+  - echo y | android-sdk-linux/tools/bin/sdkmanager "platform-tools" >/dev/null
+  - echo y | android-sdk-linux/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
+  
+
+  - export ANDROID_HOME=$PWD/android-sdk-linux #Setting up the environment
+  - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
+  - chmod +x ./gradlew
+
+
+assembleDebug:
+  stage: build
+  script:
+    - ./gradlew assembleDebug
+  artifacts:
+    paths:
+      - app/build/outputs/
+
+debugTests:
+  stage: test
+  script:
+    - ./gradlew -Pci --console=plain :app:testDebug
