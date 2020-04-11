@@ -1,0 +1,7 @@
+
+W
+java:S1874F":Remove this use of "ViewModelProviders"; it is deprecated.(ºõáı8ûóçû”.
+G
+java:S1874F"*Remove this use of "of"; it is deprecated.(ºõáı8ûóçû”.
+v
+java:S1450"YRemove the "mViewModel" field and declare it as a local variable in the relevant methods.(³’Á8ûóçû”.
