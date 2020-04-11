@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/colorPrimary"
-            app:itemTextColor="@color/cardview_light_background"
+            app:itemTextColor="@color/colorAccent"
             app:menu="@menu/bottom_navigation"
             tools:ignore="PrivateResource" />
 
