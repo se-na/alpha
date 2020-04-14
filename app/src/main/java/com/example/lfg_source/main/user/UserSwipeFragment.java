@@ -4,6 +4,8 @@ import androidx.core.view.GestureDetectorCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class UserSwipeFragment extends Fragment {
     private TextView id;
     private TextView name;
     private TextView firstName;
+    private ProgressBar mProgress;
     private List<User> usersToSwipe = new ArrayList<>();
 
     int listCounter = 0;
@@ -54,6 +58,12 @@ public class UserSwipeFragment extends Fragment {
         id = view.findViewById(R.id.id);
         name = view.findViewById(R.id.name);
         firstName = view.findViewById(R.id.firstname);
+        Resources res = getResources();
+        Drawable drawable = res.getDrawable(R.drawable.circular);
+        mProgress = (ProgressBar) view.findViewById(R.id.circularProgressbar);
+        mProgress.setProgress(60);   // Main Progress
+        mProgress.setMax(100); // Maximum Progress
+        mProgress.setProgressDrawable(drawable);
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

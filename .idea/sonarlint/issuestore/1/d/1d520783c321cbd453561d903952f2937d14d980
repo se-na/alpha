@@ -1,11 +1,9 @@
 
-@
-java:S1874""*Remove this use of "of"; it is deprecated.(γ¥φ
-P
-java:S1874"":Remove this use of "ViewModelProviders"; it is deprecated.(γ¥φ
-t
-java:S1450"YRemove the "mViewModel" field and declare it as a local variable in the relevant methods.(½–φαψÿÿÿÿ
-T
-java:S1135#"2Complete the task associated to this TODO comment.(ϋμÿΦψÿÿÿÿ8€»•.
 I
 java:S1068".Remove this unused "mViewModel" private field.(½–φαψÿÿÿÿ
+t
+java:S1450"YRemove the "mViewModel" field and declare it as a local variable in the relevant methods.(½–φαψÿÿÿÿ
+P
+java:S1874"":Remove this use of "ViewModelProviders"; it is deprecated.(γ¥φ
+@
+java:S1874""*Remove this use of "of"; it is deprecated.(γ¥φ

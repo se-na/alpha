@@ -1,7 +1,9 @@
 
-W
-java:S1874F":Remove this use of "ViewModelProviders"; it is deprecated.(Ίυαύ8ϋσηϋ”.
 G
-java:S1874F"*Remove this use of "of"; it is deprecated.(Ίυαύ8ϋσηϋ”.
+java:S1874P"*Remove this use of "of"; it is deprecated.(Ίυαύ8ϋσηϋ”.
 v
-java:S1450"YRemove the "mViewModel" field and declare it as a local variable in the relevant methods.(³’Α8ϋσηϋ”.
+java:S1450"YRemove the "mViewModel" field and declare it as a local variable in the relevant methods.(³’Α8ϋσηϋ”.
+W
+java:S1874P":Remove this use of "ViewModelProviders"; it is deprecated.(Ίυαύ8ϋσηϋ”.
+u
+java:S1450&"XRemove the "mProgress" field and declare it as a local variable in the relevant methods.(ΘαΖ8Κ®‰Θ—.

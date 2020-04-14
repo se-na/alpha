@@ -9,7 +9,7 @@ public class User {
     private String name;
     @JsonProperty("firstName")
     private String firstName;
-
+    
 
     public Integer getId(){
         return id;
