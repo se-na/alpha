@@ -23,7 +23,7 @@ public class UserSwipeViewModel extends ViewModel {
     }
 
     public void sendMessage() {
-        final String url = "http://152.96.56.38:8080/api/User";
+        final String url = "http://152.96.56.38:8080/User";
         RestClient task = new RestClient();
         task.setSwipeViewModel(this);
         task.execute(url);

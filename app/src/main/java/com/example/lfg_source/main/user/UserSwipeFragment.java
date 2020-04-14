@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.User;
 import com.example.lfg_source.animation.DetectSwipeGestureListener;
+import com.example.lfg_source.rest.RestClientPut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +36,9 @@ public class UserSwipeFragment extends Fragment {
     private TextView id;
     private TextView name;
     private TextView firstName;
-    private ProgressBar mProgress;
     private List<User> usersToSwipe = new ArrayList<>();
 
-    int listCounter = 0;
+    private int listCounter = 0;
 
     public boolean isInterested() {
         return interested;
@@ -60,7 +60,7 @@ public class UserSwipeFragment extends Fragment {
         firstName = view.findViewById(R.id.firstname);
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
-        mProgress = (ProgressBar) view.findViewById(R.id.circularProgressbar);
+        ProgressBar mProgress = (ProgressBar) view.findViewById(R.id.circularProgressbar);
         mProgress.setProgress(60);   // Main Progress
         mProgress.setMax(100); // Maximum Progress
         mProgress.setProgressDrawable(drawable);
@@ -83,8 +83,8 @@ public class UserSwipeFragment extends Fragment {
             public void onChanged(List<User> users) {
                 usersToSwipe.addAll(users);
                 id.setText(usersToSwipe.get(listCounter).getId().toString());
-                name.setText(usersToSwipe.get(listCounter).getName());
-                firstName.setText(usersToSwipe.get(listCounter).getfirstName());
+                name.setText(usersToSwipe.get(listCounter).getLastName());
+                firstName.setText(usersToSwipe.get(listCounter).getFirstName());
                 listCounter++;
             }
         };
@@ -97,19 +97,23 @@ public class UserSwipeFragment extends Fragment {
         this.interested = value;
         String text = "Match interested: " + value;
         Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+        final String url = "http://152.96.56.38:8080/User/bool";
+        RestClientPut task = new RestClientPut();
+        task.setMessage(value);
+        task.execute(url);
     }
 
     public void showSuggestion(){
         if(listCounter < usersToSwipe.size()){
             id.setText(usersToSwipe.get(listCounter).getId().toString());
-            name.setText(usersToSwipe.get(listCounter).getName());
-            firstName.setText(usersToSwipe.get(listCounter).getfirstName());
+            name.setText(usersToSwipe.get(listCounter).getLastName());
+            firstName.setText(usersToSwipe.get(listCounter).getFirstName());
             listCounter++;
         }else { // hier später no Matches find zeigen...
             listCounter = 0;
             id.setText(usersToSwipe.get(listCounter).getId().toString());
-            name.setText(usersToSwipe.get(listCounter).getName());
-            firstName.setText(usersToSwipe.get(listCounter).getfirstName());
+            name.setText(usersToSwipe.get(listCounter).getLastName());
+            firstName.setText(usersToSwipe.get(listCounter).getFirstName());
             listCounter++;
         }
     }

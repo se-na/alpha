@@ -3,12 +3,18 @@ package com.example.lfg_source.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
-    @JsonProperty("id")
+    @JsonProperty("userId")
     private Integer id;
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("lastName")
+    private String lastName;
     @JsonProperty("firstName")
     private String firstName;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("tags")
+    private String[] tags;
+    @JsonProperty("active")
+    private boolean active;
     
 
     public Integer getId(){
@@ -19,20 +25,44 @@ public class User {
         this.id = id;
     }
 
-    public String getName(){
-        return name;
+    public String getLastName(){
+        return lastName;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setLastName(String name){
+        this.lastName = name;
     }
 
-    public String getfirstName(){
+    public String getFirstName(){
         return firstName;
     }
 
-    public void setfirstName(String firstName){
+    public void setFirstName(String firstName){
         this.firstName = firstName;
     }
 
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
 }
