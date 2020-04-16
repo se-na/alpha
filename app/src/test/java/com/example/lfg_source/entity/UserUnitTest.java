@@ -22,13 +22,32 @@ public class UserUnitTest {
 
     @Test
     public void setAndGetName() {
-        user.setName("Hungering");
-        assertEquals("Hungering", user.getName());
+        user.setLastName("Hungering");
+        assertEquals("Hungering", user.getLastName());
     }
 
     @Test
     public void setAndGetFirstName() {
-        user.setfirstName("Adam");
-        assertEquals("Adam", user.getfirstName());
+        user.setFirstName("Adam");
+        assertEquals("Adam", user.getFirstName());
+    }
+
+    @Test
+    public void setAndGetActive(){
+        user.setActive(true);
+        assertEquals(true, user.getActive());
+    }
+
+    @Test
+    public void setAndGetDescription(){
+        user.setDescription("Gross, rund und schlau");
+        assertEquals("Gross, rund und schlau", user.getDescription());
+    }
+
+    @Test
+    public void setAndGetTags() {
+        String[] tags = {"C++", "Gross", "Stark"};
+        user.setTags(tags);
+        assertEquals(new String[]{"C++", "Gross", "Stark"}, user.getTags());
     }
 }
