@@ -55,7 +55,7 @@ public class UserSwipeFragment extends Fragment {
         gestureListener.setActivity(this);
         gestureDetectorCompat = new GestureDetectorCompat(getActivity().getParent(), gestureListener);
         View view = inflater.inflate(R.layout.user_swipe_fragment, container, false);
-        id = view.findViewById(R.id.id);
+
         name = view.findViewById(R.id.name);
         firstName = view.findViewById(R.id.firstname);
         Resources res = getResources();
@@ -82,7 +82,6 @@ public class UserSwipeFragment extends Fragment {
             @Override
             public void onChanged(List<User> users) {
                 usersToSwipe.addAll(users);
-                id.setText(usersToSwipe.get(listCounter).getId().toString());
                 name.setText(usersToSwipe.get(listCounter).getLastName());
                 firstName.setText(usersToSwipe.get(listCounter).getFirstName());
                 listCounter++;
@@ -105,13 +104,11 @@ public class UserSwipeFragment extends Fragment {
 
     public void showSuggestion(){
         if(listCounter < usersToSwipe.size()){
-            id.setText(usersToSwipe.get(listCounter).getId().toString());
             name.setText(usersToSwipe.get(listCounter).getLastName());
             firstName.setText(usersToSwipe.get(listCounter).getFirstName());
             listCounter++;
         }else { // hier später no Matches find zeigen...
             listCounter = 0;
-            id.setText(usersToSwipe.get(listCounter).getId().toString());
             name.setText(usersToSwipe.get(listCounter).getLastName());
             firstName.setText(usersToSwipe.get(listCounter).getFirstName());
             listCounter++;
