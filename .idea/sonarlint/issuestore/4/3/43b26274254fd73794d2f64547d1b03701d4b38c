@@ -1,17 +1,17 @@
 
-B
-java:S1481*",Remove this unused "message" local variable.(üÊö›
-Q
-java:S1854*";Remove this useless assignment to local variable "message".(üÊö›
-t
-java:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(÷´Øıùÿÿÿÿ
-U
-java:S1854$":Remove this useless assignment to local variable "entity".(÷´Øıùÿÿÿÿ
-J
-java:S14810"/Remove this unused "statusCode" local variable.(µõÔõúÿÿÿÿ
-{
-java:S1488&"`Immediately return this expression instead of assigning it to the temporary variable "response".(„ÑØˆøÿÿÿÿ
 Y
 java:S18540">Remove this useless assignment to local variable "statusCode".(µõÔõúÿÿÿÿ
+t
+java:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(÷´Øıùÿÿÿÿ
+J
+java:S14810"/Remove this unused "statusCode" local variable.(µõÔõúÿÿÿÿ
+U
+java:S1854$":Remove this useless assignment to local variable "entity".(÷´Øıùÿÿÿÿ
+Q
+java:S1854*";Remove this useless assignment to local variable "message".(üÊö›
+B
+java:S1481*",Remove this unused "message" local variable.(üÊö›
+{
+java:S1488&"`Immediately return this expression instead of assigning it to the temporary variable "response".(„ÑØˆøÿÿÿÿ
 F
 java:S1481$"+Remove this unused "entity" local variable.(÷´Øıùÿÿÿÿ
