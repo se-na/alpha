@@ -26,7 +26,6 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
             }
         }
         return true;
-
     }
 
     @Override
@@ -42,4 +41,5 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
     public void setActivity(UserSwipeFragment swipeFragment){
         this.swipeFragment = swipeFragment;
     }
+
 }
