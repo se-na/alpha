@@ -12,10 +12,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
-import com.example.lfg_source.main.group.GroupSwipeFragment;
+import com.example.lfg_source.main.swipe.GroupSwipeFragment;
 import com.example.lfg_source.main.match.MatchFragment;
-import com.example.lfg_source.main.user.HomeFragment;
-import com.example.lfg_source.main.user.UserSwipeFragment;
+import com.example.lfg_source.main.home.HomeFragment;
+import com.example.lfg_source.main.swipe.UserSwipeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

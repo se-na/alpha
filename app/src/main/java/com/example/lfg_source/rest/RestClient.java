@@ -5,7 +5,8 @@ import android.os.AsyncTask;
 import androidx.annotation.VisibleForTesting;
 
 import com.example.lfg_source.entity.User;
-import com.example.lfg_source.main.user.UserSwipeViewModel;
+import com.example.lfg_source.main.swipe.SwipeViewModel;
+import com.example.lfg_source.main.swipe.UserSwipeViewModel;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,9 +20,9 @@ import java.util.Arrays;
 
 public class RestClient extends AsyncTask<String, Void, ResponseEntity<User[]>> {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    public UserSwipeViewModel swipeViewModel;
+    public SwipeViewModel swipeViewModel;
 
-    public void setSwipeViewModel(UserSwipeViewModel swipeViewModel) {
+    public void setSwipeViewModel(SwipeViewModel swipeViewModel) {
         this.swipeViewModel = swipeViewModel;
     }
 
@@ -46,6 +47,6 @@ public class RestClient extends AsyncTask<String, Void, ResponseEntity<User[]>> 
 
     protected void onPostExecute(ResponseEntity<User[]> result){
         HttpStatus statusCode = result.getStatusCode();
-        swipeViewModel.setUsers(new ArrayList<User>(Arrays.asList(result.getBody())));
+        swipeViewModel.setData(new ArrayList<User>(Arrays.asList(result.getBody())));
     }
 }
