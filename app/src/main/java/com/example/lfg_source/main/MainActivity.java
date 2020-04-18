@@ -1,23 +1,22 @@
 package com.example.lfg_source.main;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
-import com.example.lfg_source.main.group.GroupFragment;
+import com.example.lfg_source.main.group.GroupSwipeFragment;
 import com.example.lfg_source.main.match.MatchFragment;
 import com.example.lfg_source.main.user.HomeFragment;
 import com.example.lfg_source.main.user.UserSwipeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new UserSwipeFragment();
                         }else {
                             getSupportActionBar().setTitle("Swipe Gruppe: " + selectedGroup.getName());
-                            selectedFragment = new GroupFragment();
-                            ((GroupFragment) selectedFragment).setSelectedGroup(selectedGroup);
+                            selectedFragment = new GroupSwipeFragment();
+                            ((GroupSwipeFragment) selectedFragment).setSelectedGroup(selectedGroup);
                         }
                         break;
                     case R.id.action_Matches:
