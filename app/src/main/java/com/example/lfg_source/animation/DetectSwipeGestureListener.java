@@ -3,13 +3,14 @@ package com.example.lfg_source.animation;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import com.example.lfg_source.main.user.UserSwipeFragment;
+import com.example.lfg_source.main.swipe.SwipeFragment;
+import com.example.lfg_source.main.swipe.UserSwipeFragment;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 
     private static int Min_Swipe_Distance_X = 100;
     private static int Max_Swipe_Distance_X = 1000;
-    private UserSwipeFragment swipeFragment = null;
+    private SwipeFragment swipeFragment = null;
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
@@ -38,7 +39,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         return super.onDoubleTap(e);
     }
 
-    public void setActivity(UserSwipeFragment swipeFragment){
+    public void setActivity(SwipeFragment swipeFragment){
         this.swipeFragment = swipeFragment;
     }
 

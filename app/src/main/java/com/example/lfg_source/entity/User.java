@@ -15,7 +15,13 @@ public class User {
     private String[] tags;
     @JsonProperty("active")
     private boolean active;
-    
+
+    public User(){
+        this.id= null;
+        this.lastName = "default";
+        this.firstName = "default";
+        this.description = "default";
+    }
 
     public Integer getId(){
         return id;

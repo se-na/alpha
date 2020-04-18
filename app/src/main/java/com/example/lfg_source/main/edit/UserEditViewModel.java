@@ -1,4 +1,4 @@
-package com.example.lfg_source.main.user;
+package com.example.lfg_source.main.edit;
 
 import androidx.lifecycle.ViewModel;
 
