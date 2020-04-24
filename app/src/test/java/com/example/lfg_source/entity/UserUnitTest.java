@@ -2,6 +2,8 @@ package com.example.lfg_source.entity;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -46,8 +48,12 @@ public class UserUnitTest {
 
     @Test
     public void setAndGetTags() {
-        String[] tags = {"C++", "Gross", "Stark"};
+        ArrayList<String> tags = new ArrayList<String>();
+        tags.add("C++");
+        tags.add("Gross");
+        tags.add("Stark");
+
         user.setTags(tags);
-        assertEquals(new String[]{"C++", "Gross", "Stark"}, user.getTags());
+        assertEquals(tags, user.getTags());
     }
 }

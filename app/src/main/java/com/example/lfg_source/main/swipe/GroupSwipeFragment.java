@@ -55,20 +55,6 @@ public class GroupSwipeFragment extends SwipeFragment {
         });
         return view;
     }
-/*    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(GroupSwipeViewModel.class);
-        final Observer<List<User>> userObserver = new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                groupsToSwipe.addAll(users);
-                showSuggestion();
-            }
-        };
-        mViewModel.getGroups().observe(getViewLifecycleOwner(), groupObserver);
-        mViewModel.sendMessage();
-    }*/
 
     @Override
     public void showSuggestion(){
@@ -84,7 +70,7 @@ public class GroupSwipeFragment extends SwipeFragment {
         }else {
             setViewElements("Zurzeit wurden leider keine Passenden Personen gefunden",
                     null,
-                    new String[0]);
+                    new ArrayList<String>());
         }
     }
 

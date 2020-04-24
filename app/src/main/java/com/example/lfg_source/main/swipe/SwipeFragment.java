@@ -15,6 +15,7 @@ import com.example.lfg_source.R;
 import com.example.lfg_source.animation.DetectSwipeGestureListener;
 import com.example.lfg_source.rest.RestClientPut;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import co.lujun.androidtagview.TagContainerLayout;
@@ -34,7 +35,6 @@ public class SwipeFragment extends Fragment {
         gestureListener.setActivity(this);
         gestureDetectorCompat = new GestureDetectorCompat(
                 Objects.requireNonNull(getActivity()).getParent(), gestureListener);
-
     }
 
     void getViewElements(View view) {
@@ -59,7 +59,7 @@ public class SwipeFragment extends Fragment {
         mProgress.setProgressDrawable(drawable);
     }
 
-    void setViewElements(String lastName, String description, String[] tags){
+    void setViewElements(String lastName, String description, ArrayList<String> tags){
         this.lastName.setText(lastName);
         this.description.setText(description);
         mTagContainerLayout.setTags(tags);
