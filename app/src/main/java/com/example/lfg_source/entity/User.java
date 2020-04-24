@@ -2,6 +2,8 @@ package com.example.lfg_source.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+
 public class User {
     @JsonProperty("userId")
     private Integer id;
@@ -12,7 +14,7 @@ public class User {
     @JsonProperty("description")
     private String description;
     @JsonProperty("tags")
-    private String[] tags;
+    private ArrayList<String> tags;
     @JsonProperty("active")
     private boolean active;
 
@@ -64,11 +66,11 @@ public class User {
         this.description = description;
     }
 
-    public String[] getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 }

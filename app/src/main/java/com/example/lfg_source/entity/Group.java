@@ -1,6 +1,9 @@
 package com.example.lfg_source.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Group {
     @JsonProperty("groupId")
     private int id;
@@ -9,7 +12,7 @@ public class Group {
     @JsonProperty("description")
     private String description;
     @JsonProperty("tags")
-    private String[] tags;
+    private ArrayList<String> tags;
     @JsonProperty("active")
     private boolean active;
 
@@ -38,19 +41,30 @@ public class Group {
         this.description = description;
     }
 
-    public String[] getTags() {
+    public ArrayList<String> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
-    public boolean isActive() {
+    public boolean getActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void changeAttributes(
+            String description,
+            boolean active,
+            String groupName,
+            ArrayList<String> tags){
+        this.active = active;
+        this.description = description;
+        this.name =groupName;
+        this.tags = tags;
     }
 }

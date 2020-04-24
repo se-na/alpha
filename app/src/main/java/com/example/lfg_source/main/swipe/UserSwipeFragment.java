@@ -58,21 +58,21 @@ public class UserSwipeFragment extends SwipeFragment {
     }
 
     @Override
-    public void showSuggestion(){
-        if(usersToSwipe.size() < 3){
+    public void showSuggestion() {
+        if (usersToSwipe.size() < 3) {
             mViewModel.sendMessage();
         }
-        if(!usersToSwipe.isEmpty()){
+        if (!usersToSwipe.isEmpty()) {
             super.setViewElements(usersToSwipe.get(0).getLastName(),
                     usersToSwipe.get(0).getDescription(),
                     usersToSwipe.get(0).getTags());
             super.setProgress();
             setUserViewElements(usersToSwipe.get(0).getFirstName());
             usersToSwipe.remove(0);
-        }else {
+        } else {
             setViewElements("Zurzeit wurden leider keine Passenden Personen gefunden",
                     null,
-                    new String[0]);
+                    new ArrayList<String>());
         }
     }
 

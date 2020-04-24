@@ -1,13 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main.edit.GroupEditFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginBottom="56dp">
 
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        tools:context=".main.edit.UserEditFragment">
 
-</FrameLayout>
+        <Switch
+            android:id="@+id/active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:shadowColor="@color/colorPrimary"
+            android:text="auf der Suche nach Teilnehmer"
+            android:textColor="@color/Text" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/groupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/active"
+            android:layout_margin="8dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Gruppen Name"
+                android:inputType="textPersonName"
+                android:textColor="@color/Text"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textColorHint="@color/defaultInput"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/groupName"
+            android:layout_margin="8dp"
+            app:errorEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|top"
+                android:hint="Beschreibe deine Gruppe"
+                android:inputType="textMultiLine"
+                android:textColor="@color/Text"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textColorHint="@color/defaultInput"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_margin="8dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="neuer Tag"
+                android:inputType="textPersonName"
+                android:textColor="@color/Text"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textColorHint="@color/defaultInput"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/description"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:text="+" />
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagcontainerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_tag"
+            android:layout_margin="8dp"
+            android:padding="10dp"
+            app:container_background_color="@color/colorBackground"
+            app:container_enable_drag="false"
+            app:container_gravity="center"
+            app:horizontal_interval="10dp"
+            app:tag_background_color="@color/colorBackground"
+            app:tag_border_color="@color/colorPrimary"
+            app:tag_border_width="1dp"
+            app:tag_clickable="true"
+            app:tag_corner_radius="3dp"
+            app:tag_text_color="@color/Text"
+            app:tag_text_size="16sp"
+            app:tag_theme="none"
+            app:vertical_interval="10dp" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagcontainerLayout"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:text="Abbrechen" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagcontainerLayout"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:text="Speichern" />
+    </RelativeLayout>
+</ScrollView>
