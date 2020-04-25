@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.match.MatchFragment">
 
     <TextView
+        android:id="@+id/yourMatchesText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Your Matches:"
+        android:textColor="@color/Text"/>
 
-</FrameLayout>
+    <View
+        android:id="@+id/divider1"
+        android:layout_below="@+id/yourMatchesText"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/yourMatchesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/divider1" />
+
+</RelativeLayout>

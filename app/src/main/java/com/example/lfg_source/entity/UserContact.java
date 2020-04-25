@@ -1,4 +1,5 @@
 package com.example.lfg_source.entity;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -21,43 +22,51 @@ public class UserContact {
     @JsonProperty("active")
     private boolean active;
 
-    public UserContact(){
-        this.id= null;
+    public UserContact() {
+        this.id = null;
         this.lastName = "default";
         this.firstName = "default";
         this.description = "default";
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String name){
+    public void setLastName(String name) {
         this.lastName = name;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName){
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public boolean getActive() {
-        return active;
+    public String getEmail() {
+        return email;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getDescription() {
@@ -76,16 +85,16 @@ public class UserContact {
         this.tags = tags;
     }
 
-    public String getEmail() { return email; }
+    public boolean getActive() {
+        return active;
+    }
 
-    public void setEmail(String email) { this.email = email; }
-
-    public String getPhone() { return phone; }
-
-    public void setPhone(String phone) { this.phone = phone; }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public void changeAttributes(String description, boolean active, String firstName,
-                                 String phone, String lastName, String email, ArrayList<String> tags){
+                                 String phone, String lastName, String email, ArrayList<String> tags) {
         this.description = description;
         this.active = active;
         this.email = email;
@@ -94,5 +103,4 @@ public class UserContact {
         this.phone = phone;
         this.tags = tags;
     }
-
 }

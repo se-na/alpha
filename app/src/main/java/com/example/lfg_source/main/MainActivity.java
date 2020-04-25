@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,19 +11,20 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
+import com.example.lfg_source.entity.UserContact;
 import com.example.lfg_source.main.home.HomeFragment;
 import com.example.lfg_source.main.match.MatchFragment;
 import com.example.lfg_source.main.swipe.GroupSwipeFragment;
 import com.example.lfg_source.main.swipe.UserSwipeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    public final HomeFragment HOMEFRAGMENT = new HomeFragment();
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    public HomeFragment homeFragment = null;
     public Fragment selectedFragment;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     public Group selectedGroup = null;
+    UserContact loggedInUser = new UserContact();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("LFG Home");
 
+        loggedInUser = new UserContact();
+        loggedInUser.setActive(true);
+        loggedInUser.setLastName("Tulpenmus");
+        loggedInUser.setFirstName("Bernard");
+        loggedInUser.setDescription("Ich bin de Bernie");
+        loggedInUser.setId(2);
+        ArrayList<String> tags = new ArrayList<>();
+        tags.add("Joggen");
+        tags.add("Wasserski");
+        tags.add("Tauchen");
+        loggedInUser.setTags(tags);
+        loggedInUser.setEmail("bernie@tulpenmus.ch");
+        loggedInUser.setPhone("02938492389");
+
+        homeFragment = new HomeFragment(loggedInUser);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.fragment_container, HOMEFRAGMENT);
+        fragmentTransaction.add(R.id.fragment_container, homeFragment);
         fragmentTransaction.commit();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.mainNavigation);
@@ -44,22 +60,21 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_swipe:
-                        if(selectedGroup == null){
+                        if (selectedGroup == null) {
                             getSupportActionBar().setTitle("Swipe User");
-                            selectedFragment = new UserSwipeFragment();
-                        }else {
+                            selectedFragment = new GroupSwipeFragment(loggedInUser.getId());
+                        } else {
                             getSupportActionBar().setTitle("Swipe Gruppe: " + selectedGroup.getName());
-                            selectedFragment = new GroupSwipeFragment();
-                            ((GroupSwipeFragment) selectedFragment).setSelectedGroup(selectedGroup);
+                            selectedFragment = new UserSwipeFragment(selectedGroup);
                         }
                         break;
                     case R.id.action_Matches:
                         getSupportActionBar().setTitle("Match");
-                        selectedFragment = new MatchFragment();
+                        selectedFragment = new MatchFragment(loggedInUser);
                         break;
                     default:
                         getSupportActionBar().setTitle("LFG Home");
-                        selectedFragment = HOMEFRAGMENT;
+                        selectedFragment = homeFragment;
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
