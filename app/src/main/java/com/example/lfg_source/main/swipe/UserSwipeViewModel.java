@@ -1,20 +1,35 @@
 package com.example.lfg_source.main.swipe;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.lfg_source.entity.User;
-import com.example.lfg_source.rest.RestClient;
+import com.example.lfg_source.entity.Group;
+import com.example.lfg_source.rest.RestClientUserSwipe;
 
 import java.util.List;
 
 public class UserSwipeViewModel<User> extends SwipeViewModel {
+    private MutableLiveData<List<User>> data;
 
-    @Override
+    public void setData(List<User> data) {
+        this.data.setValue(data);
+    }
+
+    public MutableLiveData<List<User>> getData() {
+        if (data == null) {
+            data = new MutableLiveData<>();
+        }
+        return data;
+    }
+
+    private Group group;
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
     public void sendMessage() {
-        final String url = "http://152.96.56.38:8080/User";
-        RestClient task = new RestClient();
-        task.setSwipeViewModel(this);
+        final String url = "http://152.96.56.38:8080/Group/Suggestions/" + group.getId();
+        RestClientUserSwipe task = new RestClientUserSwipe(this);
         task.execute(url);
     }
 }

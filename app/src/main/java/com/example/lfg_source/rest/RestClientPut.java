@@ -18,13 +18,12 @@ public class RestClientPut extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... uri) {
         final String url = uri[0];
         RestTemplate restTemplate = new RestTemplate();
-        try{
+        try {
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-            HttpHeaders headers =new HttpHeaders();
+            HttpHeaders headers = new HttpHeaders();
             HttpEntity<String> entity = new HttpEntity<String>(headers);
             restTemplate.put(url, message);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             String answer = e.getMessage();
         }
         return null;

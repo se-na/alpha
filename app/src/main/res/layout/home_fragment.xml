@@ -1,13 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".main.home.HomeFragment">
 
-    <TextView
+    <include
+        android:id="@+id/yourProfile"
+        layout="@layout/home_list_entry"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentTop="true" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/groupsTextView"
+        android:layout_below="@+id/yourProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Groups"
+        android:textColor="@color/Text"/>
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_below="@+id/groupsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groupSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/divider1" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_below="@+id/groupSelect"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/newGroupText"
+        android:layout_below="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:paddingLeft="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="New Group"
+        android:textColor="@color/Text"/>
+
+    <ImageButton
+        android:id="@+id/newGroupButton"
+        android:layout_below="@+id/divider2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:tint="@color/colorPrimary"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_add_black_24dp" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_below="@+id/newGroupText"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
+
+</RelativeLayout>

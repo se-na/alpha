@@ -1,30 +1,35 @@
 package com.example.lfg_source.main.edit;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
+import com.example.lfg_source.entity.UserContact;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class GroupEditFragment extends EditFragment {
-
+    UserContact loggedInUserOrGroupAdmin;
     private GroupEditViewModel mViewModel;
     private Group actualGroup;
 
     private TextInputLayout inputGroupName;
 
-    public static GroupEditFragment newInstance() {
-        return new GroupEditFragment();
+    public GroupEditFragment(UserContact loggedInUserOrGroupAdmin) {
+        super(loggedInUserOrGroupAdmin, new Group());
+        this.loggedInUserOrGroupAdmin = loggedInUserOrGroupAdmin;
+    }
+
+    public GroupEditFragment(Group group, UserContact loggedInUserOrGroupAdmin) {
+        super(loggedInUserOrGroupAdmin, group);
+        this.loggedInUserOrGroupAdmin = loggedInUserOrGroupAdmin;
+        actualGroup = group;
     }
 
     @Override
@@ -51,12 +56,17 @@ public class GroupEditFragment extends EditFragment {
     }
 
     private void setActualGroup() {
-        actualGroup = new Group();
+        if (actualGroup == null) {
+            actualGroup = new Group();
+        }
     }
 
     private void getGroupViewElements(View view) {
         inputGroupName = view.findViewById(R.id.groupName);
 
+        if (actualGroup != null) {
+            inputGroupName.getEditText().setText(actualGroup.getName());
+        }
     }
 
     @Override
@@ -65,9 +75,9 @@ public class GroupEditFragment extends EditFragment {
         mViewModel = ViewModelProviders.of(this).get(GroupEditViewModel.class);
     }
 
-    private boolean validateGroupName(){
+    private boolean validateGroupName() {
         String firstName = inputGroupName.getEditText().getText().toString().trim();
-        if(firstName.isEmpty()){
+        if (firstName.isEmpty()) {
             inputGroupName.setError("Geben Sie einen Gruppennamen an ein");
             return false;
         }
@@ -75,7 +85,7 @@ public class GroupEditFragment extends EditFragment {
     }
 
     @Override
-    protected boolean allValidate(){
+    protected boolean allValidate() {
         return !(!validateGroupName());
     }
 }

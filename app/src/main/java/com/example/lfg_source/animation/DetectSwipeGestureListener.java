@@ -4,7 +4,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.example.lfg_source.main.swipe.SwipeFragment;
-import com.example.lfg_source.main.swipe.UserSwipeFragment;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -12,16 +11,20 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
     private static int Max_Swipe_Distance_X = 1000;
     private SwipeFragment swipeFragment = null;
 
+    public DetectSwipeGestureListener(SwipeFragment swipeFragment){
+        this.swipeFragment = swipeFragment;
+    }
+
     @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY){
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         float deltaX = e1.getX() - e2.getX();
         float deltaXAbs = Math.abs(deltaX);
 
-        if(deltaXAbs >= Min_Swipe_Distance_X && deltaXAbs <= Max_Swipe_Distance_X){
-            if(deltaX >= 0){
+        if (deltaXAbs >= Min_Swipe_Distance_X && deltaXAbs <= Max_Swipe_Distance_X) {
+            if (deltaX >= 0) {
                 this.swipeFragment.setInterested(false);
                 this.swipeFragment.showSuggestion();
-            }else{
+            } else {
                 this.swipeFragment.setInterested(true);
                 this.swipeFragment.showSuggestion();
             }
@@ -30,17 +33,12 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
     }
 
     @Override
-    public boolean onSingleTapConfirmed(MotionEvent e){
+    public boolean onSingleTapConfirmed(MotionEvent e) {
         return super.onSingleTapConfirmed(e);
     }
 
     @Override
-    public boolean onDoubleTap(MotionEvent e){
+    public boolean onDoubleTap(MotionEvent e) {
         return super.onDoubleTap(e);
     }
-
-    public void setActivity(SwipeFragment swipeFragment){
-        this.swipeFragment = swipeFragment;
-    }
-
 }

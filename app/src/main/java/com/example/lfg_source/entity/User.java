@@ -18,44 +18,35 @@ public class User {
     @JsonProperty("active")
     private boolean active;
 
-    public User(){
-        this.id= null;
+    public User() {
+        this.id = null;
         this.lastName = "default";
         this.firstName = "default";
         this.description = "default";
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String name){
+    public void setLastName(String name) {
         this.lastName = name;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName){
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-
-    public boolean getActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public String getDescription() {
@@ -72,5 +63,13 @@ public class User {
 
     public void setTags(ArrayList<String> tags) {
         this.tags = tags;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
