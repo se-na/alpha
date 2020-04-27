@@ -83,9 +83,13 @@ public class Group {
             String description,
             boolean active,
             String groupName,
+            String phoneNumber,
+            String email,
             ArrayList<String> tags) {
         this.active = active;
         this.description = description;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.name = groupName;
         this.tags = tags;
     }

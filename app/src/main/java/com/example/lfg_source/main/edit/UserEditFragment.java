@@ -20,15 +20,13 @@ public class UserEditFragment extends EditFragment {
 
     private TextInputLayout inputFirstName;
     private TextInputLayout inputLastName;
-    private TextInputLayout inputEmail;
-    private TextInputLayout inputPhone;
 
     public UserEditFragment() {
-        super(null);
+        super();
     }
 
     public UserEditFragment(UserContact loggedInUser) {
-        super(loggedInUser);
+        super();
         actualuser = loggedInUser;
     }
 
@@ -39,7 +37,12 @@ public class UserEditFragment extends EditFragment {
         setActualUser();
         super.getViewElements(view);
         getUserViewElements(view);
-        super.setButtons();
+        if(actualuser == null){
+            setActualUser();
+        }else{
+            super.setValues(actualuser.getDescription(), actualuser.getTags(), actualuser.getEmail(), actualuser.getPhone(), actualuser.getActive());
+        }
+        super.setButtons(actualuser);
         super.setUpTagContainer();
         return view;
     }
@@ -56,9 +59,9 @@ public class UserEditFragment extends EditFragment {
                 super.getInputDescriptionString(),
                 super.getActiveState(),
                 inputFirstName.getEditText().getText().toString().trim(),
-                inputPhone.getEditText().getText().toString().trim(),
+                super.getInputPhone(),
                 inputLastName.getEditText().getText().toString().trim(),
-                inputEmail.getEditText().getText().toString().trim(),
+                super.getInputEmail(),
                 super.getTags()
         );
     }
@@ -81,36 +84,12 @@ public class UserEditFragment extends EditFragment {
         return true;
     }
 
-    private boolean validateContact() {
-        String email = inputEmail.getEditText().getText().toString().trim();
-        String phone = inputPhone.getEditText().getText().toString().trim();
-        boolean validate = true;
-        if (email.isEmpty() && phone.isEmpty()) {
-            inputEmail.setError("Geben sie Ihre EmailAdresse oder Telefonnummer ein");
-            inputPhone.setError("Geben sie Ihre EmailAdresse oder Telefonnummer ein");
-            validate = false;
-        }
-        if (!email.isEmpty() && !email.contains("@")) {
-            inputEmail.setError("Geben sie eine gültige EmailAdresse ein");
-            validate = false;
-        }
-        return validate;
-    }
-
     private void getUserViewElements(View view) {
         inputFirstName = view.findViewById(R.id.firstName);
         inputLastName = view.findViewById(R.id.lastName);
-        inputEmail = view.findViewById(R.id.email);
-        inputPhone = view.findViewById(R.id.phoneNumber);
 
         inputFirstName.getEditText().setText(actualuser.getFirstName());
         inputLastName.getEditText().setText(actualuser.getLastName());
-        if (actualuser.getEmail() != null) {
-            inputEmail.getEditText().setText(actualuser.getEmail());
-        }
-        if (actualuser.getPhone() != null) {
-            inputPhone.getEditText().setText(actualuser.getPhone());
-        }
     }
 
     @Override
@@ -121,6 +100,6 @@ public class UserEditFragment extends EditFragment {
 
     @Override
     protected boolean allValidate() {
-        return !(!validateLastName() | !validateFirstName() | !validateContact());
+        return !(!validateLastName() | !validateFirstName());
     }
 }

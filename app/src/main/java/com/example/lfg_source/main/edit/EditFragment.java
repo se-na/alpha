@@ -21,8 +21,10 @@ import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
 
 public class EditFragment extends Fragment {
-    private UserContact loggedInUser;
-    private Group group = null;
+    //private UserContact loggedInUser;
+    //private Group group = null;
+    private TextInputLayout inputEmail;
+    private TextInputLayout inputPhone;
     private TextInputLayout inputDescription;
     private Button save;
     private Button cancel;
@@ -33,14 +35,6 @@ public class EditFragment extends Fragment {
 
     ArrayList<String> tags = new ArrayList<String>();
 
-    public EditFragment(UserContact loggedInUser) {
-        this.loggedInUser = loggedInUser;
-    }
-
-    public EditFragment(UserContact loggedInUser, Group group) {
-        this.loggedInUser = loggedInUser;
-        this.group = group;
-    }
 
     protected void setUpTagContainer() {
         mTagContainerLayout.setTags(tags);
@@ -87,15 +81,15 @@ public class EditFragment extends Fragment {
         dialog.show();
     }
 
-    protected void setButtons() {
+    protected void setButtons(final UserContact loggedInUserOrGroupAdmin) {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!allValidate() | !validateTags()) {
+                if (!allValidate() | !validateTags() | !validateContact()) {
                     return;
                 }
                 update();
-                goToHome();
+                goToHome(loggedInUserOrGroupAdmin);
             }
         });
         btnAddTag.setOnClickListener(new View.OnClickListener() {
@@ -108,13 +102,13 @@ public class EditFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToHome();
+                goToHome(loggedInUserOrGroupAdmin);
             }
         });
     }
 
-    protected void goToHome() {
-        Fragment newFragment = new HomeFragment(loggedInUser);
+    protected void goToHome(UserContact loggedInUserOrGroupAdmin) {
+        Fragment newFragment = new HomeFragment(loggedInUserOrGroupAdmin);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);
@@ -128,15 +122,33 @@ public class EditFragment extends Fragment {
     protected void update() {
     }
 
+    private boolean validateContact() {
+        String email = inputEmail.getEditText().getText().toString().trim();
+        String phone = inputPhone.getEditText().getText().toString().trim();
+        boolean validate = true;
+        if (email.isEmpty() && phone.isEmpty()) {
+            inputEmail.setError("Geben sie Ihre EmailAdresse oder Telefonnummer ein");
+            inputPhone.setError("Geben sie Ihre EmailAdresse oder Telefonnummer ein");
+            validate = false;
+        }
+        if (!email.isEmpty() && !email.contains("@")) {
+            inputEmail.setError("Geben sie eine gültige EmailAdresse ein");
+            validate = false;
+        }
+        return validate;
+    }
+
     protected boolean validateTags() {
-        if (mTagContainerLayout.getTags().size() > 20 || mTagContainerLayout.getTags().size() < 7) {
-            textTag.setError("Geben Sie zwischen 7 und 20 Tags ein");
+        if (mTagContainerLayout.getTags().size() > 20 || mTagContainerLayout.getTags().size() < 3) {
+            textTag.setError("Geben Sie zwischen 3 und 20 Tags ein");
             return false;
         }
         return true;
     }
 
     protected void getViewElements(View view) {
+        inputEmail = view.findViewById(R.id.email);
+        inputPhone = view.findViewById(R.id.phoneNumber);
         inputDescription = view.findViewById(R.id.description);
         save = view.findViewById(R.id.save_button);
         cancel = view.findViewById(R.id.cancel_button);
@@ -145,7 +157,7 @@ public class EditFragment extends Fragment {
         textTag = view.findViewById(R.id.text_tag);
         active = view.findViewById(R.id.active);
 
-        if (loggedInUser != null && group == null) {
+       /* if (loggedInUser != null && group == null) {
             if (loggedInUser.getDescription() != null) {
                 inputDescription.getEditText().setText(loggedInUser.getDescription());
             }
@@ -153,6 +165,12 @@ public class EditFragment extends Fragment {
                 for (String tag : loggedInUser.getTags()) {
                     tags.add(tag);
                 }
+            }
+            if (loggedInUser.getEmail() != null) {
+                inputEmail.getEditText().setText(loggedInUser.getEmail());
+            }
+            if (loggedInUser.getPhone() != null) {
+                inputPhone.getEditText().setText(loggedInUser.getPhone());
             }
             active.setChecked(loggedInUser.getActive());
         } else if (group != null) {
@@ -164,8 +182,38 @@ public class EditFragment extends Fragment {
                     tags.add(tag);
                 }
             }
+            if (group.getEmail() != null) {
+                inputEmail.getEditText().setText(group.getEmail());
+            }
+            if (group.getPhoneNumber() != null) {
+                inputPhone.getEditText().setText(group.getPhoneNumber());
+            }
             active.setChecked(group.getActive());
         }
+
+        */
+    }
+
+    protected void setValues(String description,
+                             ArrayList<String> mytags,
+                             String email,
+                             String phoneNumber,
+                             boolean actived){
+        if (description != null) {
+            inputDescription.getEditText().setText(description);
+        }
+        if (mytags != null) {
+            for (String tag : mytags) {
+                tags.add(tag);
+            }
+        }
+        if (email != null) {
+            inputEmail.getEditText().setText(email);
+        }
+        if (phoneNumber != null) {
+            inputPhone.getEditText().setText(phoneNumber);
+        }
+        active.setChecked(actived);
     }
 
     protected boolean getActiveState() {
@@ -174,6 +222,14 @@ public class EditFragment extends Fragment {
 
     protected String getInputDescriptionString() {
         return inputDescription.getEditText().toString().trim();
+    }
+
+    protected String getInputEmail() {
+        return inputEmail.getEditText().getText().toString().trim();
+    }
+
+    protected String getInputPhone() {
+        return inputPhone.getEditText().getText().toString().trim();
     }
 
     protected ArrayList<String> getTags() {

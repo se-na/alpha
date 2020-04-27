@@ -22,12 +22,13 @@ public class GroupEditFragment extends EditFragment {
     private TextInputLayout inputGroupName;
 
     public GroupEditFragment(UserContact loggedInUserOrGroupAdmin) {
-        super(loggedInUserOrGroupAdmin, new Group());
+        super();
         this.loggedInUserOrGroupAdmin = loggedInUserOrGroupAdmin;
+        this.actualGroup = new Group();
     }
 
     public GroupEditFragment(Group group, UserContact loggedInUserOrGroupAdmin) {
-        super(loggedInUserOrGroupAdmin, group);
+        super();
         this.loggedInUserOrGroupAdmin = loggedInUserOrGroupAdmin;
         actualGroup = group;
     }
@@ -36,10 +37,15 @@ public class GroupEditFragment extends EditFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.group_edit_fragment, container, false);
-        setActualGroup();
+
         super.getViewElements(view);
         getGroupViewElements(view);
-        super.setButtons();
+        if(actualGroup == null){
+            setActualGroup();
+        }else{
+            super.setValues(actualGroup.getDescription(), actualGroup.getTags(), actualGroup.getEmail(), actualGroup.getPhoneNumber(), actualGroup.getActive());
+        }
+        super.setButtons(loggedInUserOrGroupAdmin);
         super.setUpTagContainer();
 
         return view;
@@ -51,6 +57,8 @@ public class GroupEditFragment extends EditFragment {
                 super.getInputDescriptionString(),
                 super.getActiveState(),
                 inputGroupName.getEditText().getText().toString().trim(),
+                super.getInputPhone(),
+                super.getInputEmail(),
                 super.getTags()
         );
     }
