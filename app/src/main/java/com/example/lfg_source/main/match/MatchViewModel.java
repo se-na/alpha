@@ -8,7 +8,6 @@ import com.example.lfg_source.entity.User;
 import com.example.lfg_source.rest.RestClientMatchGroup;
 import com.example.lfg_source.rest.RestClientMatchUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MatchViewModel extends ViewModel {
@@ -50,23 +49,21 @@ public class MatchViewModel extends ViewModel {
     }
 
     public void sendMessage(int userID) {
-        //final String url = "http://152.96.56.38:8080/User/Matches/" + userID;
-        final String url = "http://152.96.56.38:8080/User/MyGroups/2";
+        final String url = "http://152.96.56.38:8080/User/Matches/" + userID;
         RestClientMatchGroup task = new RestClientMatchGroup(this, false);
 
         task.execute(url);
     }
 
     public void sendMessageAdmin(int userID) {
-        //final String url = "http://152.96.56.38:8080/User/Matches/" + userID;
-        final String url = "http://152.96.56.38:8080/User/MyGroups/2";
+        final String url = "http://152.96.56.38:8080/User/Matches/" + userID;
         RestClientMatchGroup task = new RestClientMatchGroup(this, true);
 
         task.execute(url);
     }
 
     public void sendMessage(Group group) {
-        final String url = "http://152.96.56.38:8080/Group/Matches/" + group.getId();
+        final String url = "http://152.96.56.38:8080/Group/Matches/" + group.getOwnerId();
         RestClientMatchUser task = new RestClientMatchUser(this);
         task.execute(url);
     }

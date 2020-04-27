@@ -18,8 +18,8 @@ public class GroupUnitTest {
 
     @Test
     public void setAndGetId() {
-        group.setId(2);
-        int id = group.getId();
+        group.setOwnerId(2);
+        int id = group.getOwnerId();
         assertEquals(2, id);
     }
 

@@ -11,25 +11,29 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
-import com.example.lfg_source.entity.UserContact;
+import com.example.lfg_source.entity.User;
+import com.example.lfg_source.rest.RestClientEditGroupPatch;
+import com.example.lfg_source.rest.RestClientNewGroupPost;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class GroupEditFragment extends EditFragment {
-    UserContact loggedInUserOrGroupAdmin;
+    User groupAdminUser;
     private GroupEditViewModel mViewModel;
     private Group actualGroup;
+    private Boolean isNewGroup = false;
 
     private TextInputLayout inputGroupName;
 
-    public GroupEditFragment(UserContact loggedInUserOrGroupAdmin) {
+    public GroupEditFragment(User groupAdminUser) {
         super();
-        this.loggedInUserOrGroupAdmin = loggedInUserOrGroupAdmin;
-        this.actualGroup = new Group();
+        this.groupAdminUser = groupAdminUser;
+        this.actualGroup = new Group(groupAdminUser.getId());
+        isNewGroup = true;
     }
 
-    public GroupEditFragment(Group group, UserContact loggedInUserOrGroupAdmin) {
+    public GroupEditFragment(Group group, User groupAdminUser) {
         super();
-        this.loggedInUserOrGroupAdmin = loggedInUserOrGroupAdmin;
+        this.groupAdminUser = groupAdminUser;
         actualGroup = group;
     }
 
@@ -40,12 +44,8 @@ public class GroupEditFragment extends EditFragment {
 
         super.getViewElements(view);
         getGroupViewElements(view);
-        if(actualGroup == null){
-            setActualGroup();
-        }else{
-            super.setValues(actualGroup.getDescription(), actualGroup.getTags(), actualGroup.getEmail(), actualGroup.getPhoneNumber(), actualGroup.getActive());
-        }
-        super.setButtons(loggedInUserOrGroupAdmin);
+        super.setValues(actualGroup.getDescription(), actualGroup.getTags(), actualGroup.getEmail(), actualGroup.getPhoneNumber(), actualGroup.getActive());
+        super.setButtons(groupAdminUser);
         super.setUpTagContainer();
 
         return view;
@@ -61,12 +61,24 @@ public class GroupEditFragment extends EditFragment {
                 super.getInputEmail(),
                 super.getTags()
         );
+        if(isNewGroup){
+            sendMessageNewGroup();
+        }
+        else{
+            sendMessageEditGroup();
+        }
     }
 
-    private void setActualGroup() {
-        if (actualGroup == null) {
-            actualGroup = new Group();
-        }
+    private void sendMessageNewGroup() {
+        final String url = "http://152.96.56.38:8080/Group";
+        RestClientNewGroupPost task = new RestClientNewGroupPost(actualGroup);
+        task.execute(url);
+    }
+
+    private void sendMessageEditGroup() {
+        final String url = "http://152.96.56.38:8080/Group/update";
+        RestClientEditGroupPatch task = new RestClientEditGroupPatch(actualGroup);
+        task.execute(url);
     }
 
     private void getGroupViewElements(View view) {

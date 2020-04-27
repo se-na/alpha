@@ -18,7 +18,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.animation.DetectSwipeGestureListener;
+import com.example.lfg_source.entity.AnswerEntity;
 import com.example.lfg_source.entity.Group;
+import com.example.lfg_source.rest.RestClientAnswerPost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,6 @@ public class GroupSwipeFragment extends SwipeFragment {
     private GroupSwipeViewModel mViewModel;
     private int userId;
     private GestureDetectorCompat gestureDetectorCompat;
-
 
     private boolean isInit = true;
 
@@ -87,4 +88,23 @@ public class GroupSwipeFragment extends SwipeFragment {
         }
     }
 
+    @Override
+    public int getUserId(){
+        return userId;
+    }
+
+    @Override
+    public int getGroupId(){
+        if(groupsToSwipe.isEmpty()){
+            return -1;
+        }
+        return groupsToSwipe.get(0).getGroupId();
+    }
+
+    @Override
+    public void sendMessage(AnswerEntity answer){
+        final String url = "http://152.96.56.38:8080/User/MatchesAnswer";
+        RestClientAnswerPost task = new RestClientAnswerPost(answer);
+        task.execute(url);
+    }
 }

@@ -11,6 +11,10 @@ public class User {
     private String lastName;
     @JsonProperty("firstName")
     private String firstName;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("phoneNumber")
+    private String phone;
     @JsonProperty("description")
     private String description;
     @JsonProperty("tags")
@@ -19,10 +23,7 @@ public class User {
     private boolean active;
 
     public User() {
-        this.id = null;
-        this.lastName = "default";
-        this.firstName = "default";
-        this.description = "default";
+        this.id = 0;
     }
 
     public Integer getId() {
@@ -49,6 +50,22 @@ public class User {
         this.firstName = firstName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -71,5 +88,16 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void changeAttributes(String description, boolean active, String firstName,
+                                 String phone, String lastName, String email, ArrayList<String> tags) {
+        this.description = description;
+        this.active = active;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.tags = tags;
     }
 }

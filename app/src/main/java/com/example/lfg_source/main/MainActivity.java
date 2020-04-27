@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
-import com.example.lfg_source.entity.UserContact;
+import com.example.lfg_source.entity.User;
 import com.example.lfg_source.main.home.HomeFragment;
 import com.example.lfg_source.main.match.MatchFragment;
 import com.example.lfg_source.main.swipe.GroupSwipeFragment;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public HomeFragment homeFragment = null;
     public Fragment selectedFragment;
     public Group selectedGroup = null;
-    UserContact loggedInUser = new UserContact();
+    private User loggedInUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("LFG Home");
 
-        loggedInUser = new UserContact();
+        loggedInUser = new User();
         loggedInUser.setActive(true);
         loggedInUser.setLastName("Tulpenmus");
         loggedInUser.setFirstName("Bernard");

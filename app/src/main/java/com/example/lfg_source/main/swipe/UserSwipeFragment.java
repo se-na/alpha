@@ -18,8 +18,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.animation.DetectSwipeGestureListener;
+import com.example.lfg_source.entity.AnswerEntity;
 import com.example.lfg_source.entity.Group;
 import com.example.lfg_source.entity.User;
+import com.example.lfg_source.rest.RestClientAnswerPost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,7 @@ public class UserSwipeFragment extends SwipeFragment {
         super.setGestureSwipe();
         View view = inflater.inflate(R.layout.user_swipe_fragment, container, false);
         super.getViewElements(view);
-        firstName = view.findViewById(R.id.firstName);
+        firstName = view.findViewById(R.id.firstname);
         return view;
     }
 
@@ -91,5 +93,25 @@ public class UserSwipeFragment extends SwipeFragment {
                     new ArrayList<String>());
             this.firstName.setText("");
         }
+    }
+
+    @Override
+    public int getUserId(){
+        if(usersToSwipe.isEmpty()){
+            return -1;
+        }
+        return usersToSwipe.get(0).getId();
+    }
+
+    @Override
+    public int getGroupId(){
+        return groupThatSearches.getGroupId();
+    }
+
+    @Override
+    public void sendMessage(AnswerEntity answer){
+        final String url = "http://152.96.56.38:8080/Group/MatchesAnswer";
+        RestClientAnswerPost task = new RestClientAnswerPost(answer);
+        task.execute(url);
     }
 }

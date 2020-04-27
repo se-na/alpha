@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
-import com.example.lfg_source.entity.UserContact;
+import com.example.lfg_source.entity.User;
 import com.example.lfg_source.main.edit.GroupEditFragment;
-import com.example.lfg_source.main.swipe.GroupSwipeFragment;
 import com.example.lfg_source.main.swipe.UserSwipeFragment;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
     private List<Group> groupList;
     private RecyclerView recyclerView;
     private HomeFragment context;
-    private UserContact loggedInUser;
+    private User loggedInUser;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,7 +39,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
         }
     }
 
-    public HomeListAdapter(List<Group> groupList, RecyclerView recyclerView, HomeFragment context, UserContact loggedInUser) {
+    public HomeListAdapter(List<Group> groupList, RecyclerView recyclerView, HomeFragment context, User loggedInUser) {
         this.groupList = groupList;
         this.recyclerView = recyclerView;
         this.context = context;

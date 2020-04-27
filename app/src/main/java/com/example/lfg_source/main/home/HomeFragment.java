@@ -23,25 +23,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
-import com.example.lfg_source.entity.UserContact;
+import com.example.lfg_source.entity.User;
 import com.example.lfg_source.main.MainActivity;
 import com.example.lfg_source.main.edit.GroupEditFragment;
 import com.example.lfg_source.main.edit.UserEditFragment;
 import com.example.lfg_source.main.swipe.GroupSwipeFragment;
-import com.example.lfg_source.main.swipe.UserSwipeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private final UserContact loggedInUser;
+    private final User loggedInUser;
     private HomeViewModel mViewModel;
     private List<Group> groupList = new ArrayList<>();
     private HomeListAdapter homeListAdapter;
     private View yourProfileView = null;
 
-    public HomeFragment(UserContact loggedInUser) {
+    public HomeFragment(User loggedInUser) {
         this.loggedInUser = loggedInUser;
     }
 

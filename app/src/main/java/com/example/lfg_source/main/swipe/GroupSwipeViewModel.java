@@ -29,7 +29,7 @@ public class GroupSwipeViewModel<Groups> extends SwipeViewModel {
     }
 
     public void sendMessage() {
-        final String url = "http://152.96.56.38:8080/User/MyGroups/" + userId;
+        final String url = "http://152.96.56.38:8080/User/Suggestions/" + userId;
         RestClientGroupSwipe task = new RestClientGroupSwipe(this);
         task.execute(url);
     }

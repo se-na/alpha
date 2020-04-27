@@ -28,7 +28,7 @@ public class UserSwipeViewModel<User> extends SwipeViewModel {
     }
 
     public void sendMessage() {
-        final String url = "http://152.96.56.38:8080/Group/Suggestions/" + group.getId();
+        final String url = "http://152.96.56.38:8080/Group/Suggestions/" + group.getGroupId();
         RestClientUserSwipe task = new RestClientUserSwipe(this);
         task.execute(url);
     }
