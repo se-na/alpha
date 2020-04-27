@@ -43,6 +43,18 @@ public class GroupUnitTest {
     }
 
     @Test
+    public void setAndGetPhoneNumber(){
+        group.setPhoneNumber("4567892315");
+        assertEquals("4567892315", group.getPhoneNumber());
+    }
+
+    @Test
+    public void setAndGetEmail(){
+        group.setEmail("abc@hsr.ch");
+        assertEquals("abc@hsr.ch", group.getEmail());
+    }
+
+    @Test
     public void setAndGetTags() {
         ArrayList<String> tags = new ArrayList<String>();
         tags.add("C++");
@@ -61,6 +73,8 @@ public class GroupUnitTest {
         group.changeAttributes("lala",
                 true,
                 "MyGroup",
+                "0456576555",
+                "hey@hsr.ch",
                 tags);
         assertEquals(tags, group.getTags());
         assertEquals("lala", group.getDescription());

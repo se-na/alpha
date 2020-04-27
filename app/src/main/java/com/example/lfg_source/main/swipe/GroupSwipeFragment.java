@@ -31,11 +31,6 @@ public class GroupSwipeFragment extends SwipeFragment {
     private int userId;
     private GestureDetectorCompat gestureDetectorCompat;
 
-    private TextView name;
-    private TextView description;
-    private TagContainerLayout mTagContainerLayout;
-    private Drawable drawable;
-    private ProgressBar mProgress;
 
     private boolean isInit = true;
 
@@ -48,35 +43,11 @@ public class GroupSwipeFragment extends SwipeFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        setGestureSwipe();
+        super.setGestureSwipe();
         View view = inflater.inflate(R.layout.group_swipe_fragment, container, false);
-        name = view.findViewById(R.id.name);
-        description = view.findViewById(R.id.description);
-        mTagContainerLayout = view.findViewById(R.id.tagcontainerLayout);
+        super.getViewElements(view);
 
-        mProgress = view.findViewById(R.id.circularProgressbar);
-        Resources res = getResources();
-        drawable = res.getDrawable(R.drawable.circular);
-        view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                gestureDetectorCompat.onTouchEvent(event);
-                return true;
-            }
-        });
         return view;
-    }
-
-    private void setProgress() {
-        mProgress.setProgress(60);
-        mProgress.setMax(100);
-        mProgress.setProgressDrawable(drawable);
-    }
-
-    private void setGestureSwipe() {
-        DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener(this);
-        gestureDetectorCompat = new GestureDetectorCompat(
-                Objects.requireNonNull(getActivity()).getParent(), gestureListener);
     }
 
     @Override
@@ -104,21 +75,16 @@ public class GroupSwipeFragment extends SwipeFragment {
             mViewModel.sendMessage();
         }
         if (!groupsToSwipe.isEmpty()) {
-            setViewElements(groupsToSwipe.get(0).getName(),
+            super.setViewElements(groupsToSwipe.get(0).getName(),
                     groupsToSwipe.get(0).getDescription(),
                     groupsToSwipe.get(0).getTags());
-            setProgress();
+            super.setProgress();
             groupsToSwipe.remove(0);
         } else {
-            setViewElements("Zurzeit wurden leider keine Passenden Gruppen gefunden",
+            super.setViewElements("Zurzeit wurden leider keine Passenden Gruppen gefunden",
                     "",
                     new ArrayList<String>());
         }
     }
 
-    void setViewElements(String lastName, String description, ArrayList<String> tags) {
-        this.name.setText(lastName);
-        this.description.setText(description);
-        mTagContainerLayout.setTags(tags);
-    }
 }
