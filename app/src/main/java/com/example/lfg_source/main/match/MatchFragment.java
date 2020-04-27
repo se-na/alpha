@@ -1,41 +1,36 @@
 package com.example.lfg_source.main.match;
 
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.lfg_source.R;
 import com.example.lfg_source.entity.Group;
 import com.example.lfg_source.entity.User;
-import com.example.lfg_source.entity.UserContact;
-import com.example.lfg_source.main.home.HomeListAdapter;
-import com.example.lfg_source.main.home.HomeViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MatchFragment extends Fragment {
-    private UserContact loggedInUser;
+    private User loggedInUser;
     private MatchViewModel mViewModel;
-    MatchListAdapter matchListAdapter;
+    private MatchListAdapter matchListAdapter;
     private List<Group> groupList = new ArrayList<>();
     private List<Group> groupAdminList = new ArrayList<>();
 
-    public MatchFragment(UserContact loggedInUser){
+    public MatchFragment(User loggedInUser) {
         this.loggedInUser = loggedInUser;
     }
 
@@ -74,6 +69,7 @@ public class MatchFragment extends Fragment {
         mViewModel.getDataGroup().observe(getViewLifecycleOwner(), userObserver);
         mViewModel.sendMessage(loggedInUser.getId());
 
+        //groupAdminList is the List of groups where the loggedInUser is admin
         final Observer<List<Group>> groupObserver = new Observer<List<Group>>() {
             @Override
             public void onChanged(List<Group> groups) {

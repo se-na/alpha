@@ -10,22 +10,26 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.lfg_source.R;
-import com.example.lfg_source.entity.UserContact;
+import com.example.lfg_source.entity.User;
+import com.example.lfg_source.rest.RestClientEditProfilePatch;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class UserEditFragment extends EditFragment {
 
     private UserEditViewModel mViewModel;
-    private UserContact actualuser;
+    private User actualuser;
+    private Boolean isNewUser = false;
 
     private TextInputLayout inputFirstName;
     private TextInputLayout inputLastName;
 
     public UserEditFragment() {
         super();
+        this.actualuser = new User();
+        isNewUser = true;
     }
 
-    public UserEditFragment(UserContact loggedInUser) {
+    public UserEditFragment(User loggedInUser) {
         super();
         actualuser = loggedInUser;
     }
@@ -34,23 +38,12 @@ public class UserEditFragment extends EditFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.user_edit_fragment, container, false);
-        setActualUser();
         super.getViewElements(view);
         getUserViewElements(view);
-        if(actualuser == null){
-            setActualUser();
-        }else{
-            super.setValues(actualuser.getDescription(), actualuser.getTags(), actualuser.getEmail(), actualuser.getPhone(), actualuser.getActive());
-        }
+        super.setValues(actualuser.getDescription(), actualuser.getTags(), actualuser.getEmail(), actualuser.getPhone(), actualuser.getActive());
         super.setButtons(actualuser);
         super.setUpTagContainer();
         return view;
-    }
-
-    private void setActualUser() {
-        if (actualuser == null) {
-            actualuser = new UserContact();
-        }
     }
 
     @Override
@@ -64,6 +57,22 @@ public class UserEditFragment extends EditFragment {
                 super.getInputEmail(),
                 super.getTags()
         );
+        if(isNewUser){
+            sendMessageNewUser();
+        }
+        else{
+            sendMessageEditUser();
+        }
+    }
+
+    private void sendMessageNewUser() {
+        final String url = "http://152.96.56.38:8080/User";
+    }
+
+    private void sendMessageEditUser() {
+        final String url = "http://152.96.56.38:8080/User/update";
+        RestClientEditProfilePatch task = new RestClientEditProfilePatch(actualuser);
+        task.execute(url);
     }
 
     private boolean validateFirstName() {

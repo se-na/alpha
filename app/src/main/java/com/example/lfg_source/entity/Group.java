@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
 public class Group {
+    @JsonProperty("groupId")
+    private int groupId;
     @JsonProperty("ownerId")
-    private int id;
+    private int ownerId;
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")
@@ -20,15 +22,27 @@ public class Group {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
-    public Group() {
+    public Group(){}
+
+    public Group(int adminId) {
+        ownerId = adminId;
+        groupId = 0;
     }
 
-    public int getId() {
-        return id;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getName() {

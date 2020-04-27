@@ -10,8 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lfg_source.R;
-import com.example.lfg_source.entity.Group;
-import com.example.lfg_source.entity.UserContact;
+import com.example.lfg_source.entity.User;
 import com.example.lfg_source.main.home.HomeFragment;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -21,8 +20,6 @@ import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
 
 public class EditFragment extends Fragment {
-    //private UserContact loggedInUser;
-    //private Group group = null;
     private TextInputLayout inputEmail;
     private TextInputLayout inputPhone;
     private TextInputLayout inputDescription;
@@ -81,7 +78,7 @@ public class EditFragment extends Fragment {
         dialog.show();
     }
 
-    protected void setButtons(final UserContact loggedInUserOrGroupAdmin) {
+    protected void setButtons(final User loggedInUserOrGroupAdmin) {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +104,7 @@ public class EditFragment extends Fragment {
         });
     }
 
-    protected void goToHome(UserContact loggedInUserOrGroupAdmin) {
+    protected void goToHome(User loggedInUserOrGroupAdmin) {
         Fragment newFragment = new HomeFragment(loggedInUserOrGroupAdmin);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
@@ -156,42 +153,6 @@ public class EditFragment extends Fragment {
         btnAddTag = (Button) view.findViewById(R.id.button_tag);
         textTag = view.findViewById(R.id.text_tag);
         active = view.findViewById(R.id.active);
-
-       /* if (loggedInUser != null && group == null) {
-            if (loggedInUser.getDescription() != null) {
-                inputDescription.getEditText().setText(loggedInUser.getDescription());
-            }
-            if (loggedInUser.getTags() != null) {
-                for (String tag : loggedInUser.getTags()) {
-                    tags.add(tag);
-                }
-            }
-            if (loggedInUser.getEmail() != null) {
-                inputEmail.getEditText().setText(loggedInUser.getEmail());
-            }
-            if (loggedInUser.getPhone() != null) {
-                inputPhone.getEditText().setText(loggedInUser.getPhone());
-            }
-            active.setChecked(loggedInUser.getActive());
-        } else if (group != null) {
-            if (group.getDescription() != null) {
-                inputDescription.getEditText().setText(group.getDescription());
-            }
-            if (group.getTags() != null) {
-                for (String tag : group.getTags()) {
-                    tags.add(tag);
-                }
-            }
-            if (group.getEmail() != null) {
-                inputEmail.getEditText().setText(group.getEmail());
-            }
-            if (group.getPhoneNumber() != null) {
-                inputPhone.getEditText().setText(group.getPhoneNumber());
-            }
-            active.setChecked(group.getActive());
-        }
-
-        */
     }
 
     protected void setValues(String description,
@@ -221,7 +182,7 @@ public class EditFragment extends Fragment {
     }
 
     protected String getInputDescriptionString() {
-        return inputDescription.getEditText().toString().trim();
+        return inputDescription.getEditText().getText().toString().trim();
     }
 
     protected String getInputEmail() {
